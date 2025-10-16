@@ -1,54 +1,30 @@
-import db from '../database/database';
+
+import { users } from '../database/database';
 import { User } from '../models/user';
 
 export const getAllUsers = (): Promise<User[]> => {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM users';
-    db.all(sql, [], (err, rows: User[]) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(rows);
-      }
-    });
-  });
+  return Promise.resolve(users);
 };
 
 export const createUser = (name: string, email: string): Promise<User> => {
-  return new Promise((resolve, reject) => {
-    const sql = 'INSERT INTO users (name, email) VALUES (?,?)';
-    db.run(sql, [name, email], function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ id: this.lastID, name, email });
-      }
-    });
-  });
+  const newUser: User = {
+    id: users.length + 1,
+    name,
+    email,
+  };
+  users.push(newUser);
+  return Promise.resolve(newUser);
 };
 
 export const getUserById = (id: number): Promise<User | null> => {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM users WHERE id = ?';
-    db.get(sql, [id], (err, row: User) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(row);
-      }
-    });
-  });
+  const user = users.find((user) => user.id === id);
+  return Promise.resolve(user || null);
 };
 
 export const deleteUserById = (id: number): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const sql = 'DELETE FROM users WHERE id = ?';
-    db.run(sql, [id], function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
+  const index = users.findIndex((user) => user.id === id);
+  if (index !== -1) {
+    users.splice(index, 1);
+  }
+  return Promise.resolve();
 };

@@ -1,33 +1,7 @@
-
 import request from 'supertest';
 import app from '../index';
-import db from '../database/database';
 
 describe('User API', () => {
-  beforeEach((done) => {
-    db.serialize(() => {
-      db.run('DROP TABLE IF EXISTS users', () => {
-        db.run(
-          `CREATE TABLE users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            email TEXT UNIQUE,
-            CONSTRAINT email_unique UNIQUE (email)
-          )`,
-          () => {
-            const insert = 'INSERT INTO users (name, email) VALUES (?,?)';
-            db.run(insert, ['admin', 'admin@example.com']);
-            db.run(insert, ['user', 'user@example.com'], done);
-          }
-        );
-      });
-    });
-  });
-
-  afterAll((done) => {
-    db.close(done);
-  });
-
   it('should get all users', async () => {
     const res = await request(app).get('/users');
     expect(res.statusCode).toEqual(200);

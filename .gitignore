@@ -28,7 +28,3 @@ lerna-debug.log*
 .DS_Store
 .vercel
 .vercelignore
-
-# db
-db.sqlite
-test.db.sqlite
