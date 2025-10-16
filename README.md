@@ -1,24 +1,6 @@
-To develop locally:
+# Test Teknis Magang Javan Cipta Solusi
 
-```
-npm install
-vc dev
-```
+Ini merupakan test teknis dari magang Javan Cipta Solusi 
 
-```
-open http://localhost:3000
-```
-
-To build locally:
-
-```
-npm install
-vc build
-```
-
-To deploy:
-
-```
-npm install
-vc deploy
-```
+Nama: Adib Ulinuha El Majid.
+Email: uliadib@gmail.com
