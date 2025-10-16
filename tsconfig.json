@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "moduleResolution": "NodeNext",
+    "isolatedModules": true,
+    "target": "ESNext",
+    "module": "NodeNext",
+    "skipLibCheck": true,
+  },
+  "exclude": ["node_modules"]
+}
